@@ -2,6 +2,8 @@ const categoryContainer = document.getElementById("categoryContainer");
 
 const foodContainer = document.getElementById("foodContainer");
 
+const reviewContainer = document.getElementById("reviewContainer");
+
 let cart = [];
 // Load Category Function
 const loadCategories = async () => {
@@ -227,3 +229,50 @@ const randomFoods = async () => {
 
 loadCategories();
 randomFoods();
+
+const reviewLoad = async () => {
+  try {
+    const res = await fetch(
+      " https://taxi-kitchen-api.vercel.app/api/v1/reviews"
+    );
+    const data = await res.json();
+    // console.log(data.reviews);
+
+    displayReview(data.reviews);
+  } catch (error) {
+    console.log(error);
+  }
+};
+const displayReview = (reviews) => {
+  // console.log(reviews);
+  reviews.forEach((review) => {
+    // console.log(review);
+    reviewContainer.innerHTML += `
+
+<div class="shadow-xl bg-[#febf00] p-3 w-full min-w-full h-full flex justify-between gap-6 items-center flex-col lg:flex-row rounded-sm">
+
+
+<div class="flex flex-col flex-1 justify-center items-center">
+
+ <img class="w-[100px] mb-3 rounded-full object-contain"
+              src="${review.photo}"
+              alt=""
+            />
+<h1 class="text-xl font-bold text-white">${review.user}</h1>
+</div>
+<div class="space-y-2 flex-1">
+<p>Email : ${review.email}</p>
+<p class="font-bold">Rating : ${review.rating}.00</p>
+<p>${review.review}</p>
+
+</div>
+
+
+</div>
+
+
+`;
+  });
+};
+
+reviewLoad();
