@@ -57,13 +57,28 @@
     </header>
     <main>
       <div
-        class="w-11/12 mx-auto min-h-[500px] border-2 my-20 grid grid-cols-1 lg:grid-cols-12 gap-10"
+        class="w-11/12 mx-auto min-h-[500px] my-20 grid grid-cols-1 lg:grid-cols-12 gap-10"
       >
         <!-- category container -->
-        <div class="bg-red-500 min-h-[300px] lg:col-span-2"></div>
+        <div class="bg-[#febf00] h-fit lg:col-span-2 p-4">
+          <h1
+            class="text-center text-2xl mb-12 font-bold rounded-3xl bg-white py-1"
+          >
+            Categories
+          </h1>
+          <div id="categoryContainer"></div>
+        </div>
 
         <!-- food container -->
-        <div class="bg-yellow-400 min-h-[300px] lg:col-span-7"></div>
+        <div class="lg:col-span-7">
+          <h1
+            class="border-b-1 text-center py-4 text-2xl font-bold text-gray-500"
+          >
+            Our Foods
+          </h1>
+
+          <div id="foodContainer" class="mt-8"></div>
+        </div>
 
         <!-- Cart container -->
         <div class="bg-cyan-300 min-h-[300px] lg:col-span-3"></div>
