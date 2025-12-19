@@ -88,7 +88,7 @@ const displayCart = (cart) => {
 <p class="text-[#fedf00] font-bold">$ ${each.price} BDT</p>
 
 </div>
-<div onclick="deleteCart(${each.id})" class="text-red-700 text-xl absolute top-0 right-1 cursor-pointer">close</div>
+<div onclick="deleteCart(${each.id})" class="bg-red-400 rounded-full text-xl absolute -top-2 -right-1 cursor-pointer"><i class="fa-solid fa-xmark"></i></div>
 
 </div>
 
@@ -140,6 +140,43 @@ const deleteCart = (id) => {
   displayCart(cart);
 };
 
+const showDetails = (id) => {
+  // console.log(id);
+
+  const fetchDetails = async () => {
+    try {
+      const res = await fetch(
+        `https://taxi-kitchen-api.vercel.app/api/v1/foods/${id}`
+      );
+      const data = await res.json();
+      // console.log(data.details);
+
+      const detailsBox = document.getElementById("detailsBox");
+
+      detailsBox.innerHTML = `
+<div class="space-y-3">
+<h1 class="text-xl font-semibold">${data.details.title}</h1>
+<div> <img src ="${data.details.foodImg}"/></div>
+
+<div class="flex justify-between items-center">
+<p class="bg-[#febf00] rounded-3xl px-2 py-1">${data.details.area}</p>
+<p class="bg-[#febf00] rounded-3xl px-2 py-1">${data.details.category}</p>
+<p class="bg-[#febf00] rounded-3xl px-2 py-1">${data.details.price} BDT</p>
+</div>
+<div><a class="underline text-blue-600 hover:text-red-600 transition-colors duration-300" href="${data.details.video}" target="_blank">
+  Watch on YouTube
+</a></div>
+</div>
+
+`;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  myModal.showModal();
+  fetchDetails();
+};
+
 const displaySingleCategoryFoods = (foods) => {
   // console.log(foods);
   foodContainer.innerHTML = "";
@@ -147,7 +184,7 @@ const displaySingleCategoryFoods = (foods) => {
     foodContainer.innerHTML += `
     <div id='${food.id}' class="flex flex-col md:flex-row gap-10  p-3 shadow-2xl mt-6 bg-white rounded-sm">
     
-    <img
+    <img onclick="showDetails(${food.id})"
               class="w-[200px] rounded-md object-contain"
               src="${food.foodImg}"
               alt=""

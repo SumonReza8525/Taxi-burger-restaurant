@@ -60,7 +60,7 @@
         class="w-11/12 mx-auto min-h-[500px] my-20 grid grid-cols-1 lg:grid-cols-12 gap-10"
       >
         <!-- category container -->
-        <div class="bg-[#febf00] h-fit lg:col-span-2 p-4">
+        <div class="bg-[#febf00] h-fit lg:col-span-2 p-4 rounded-md">
           <h1
             class="text-center text-2xl mb-12 font-bold rounded-3xl bg-white py-1"
           >
@@ -81,7 +81,9 @@
         </div>
 
         <!-- Cart container -->
-        <div class="bg-cyan-300 h-fit lg:col-span-3 px-6 pb-6">
+        <div
+          class="border-5 border-[#febf00] h-fit lg:col-span-3 px-6 pb-6 rounded-md"
+        >
           <h1
             class="border-b-1 text-center py-4 text-2xl font-bold text-gray-500"
           >
@@ -93,6 +95,23 @@
             Total : <span id="total">0</span> BDT
           </div>
         </div>
+      </div>
+
+      <div>
+        <!-- Open the modal using ID.showModal() method -->
+        <!-- <button class="btn" onclick="my_modal_5.showModal()">open modal</button> -->
+        <dialog id="myModal" class="modal modal-bottom sm:modal-middle">
+          <div class="modal-box">
+            <div id="detailsBox"></div>
+
+            <div class="modal-action">
+              <form method="dialog">
+                <!-- if there is a button in form, it will close the modal -->
+                <button class="btn">Close</button>
+              </form>
+            </div>
+          </div>
+        </dialog>
       </div>
     </main>
 
