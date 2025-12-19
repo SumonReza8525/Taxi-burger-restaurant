@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Taxi-Burger-Restaurant</title>
+
+    <!-- Google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Mooli&display=swap"
+      rel="stylesheet"
+    />
+    <!-- DaisyUI CDN -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@5"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- fontAwesome CDN -->
+    <link
+      rel="shortcut icon"
+      href="./assests/assets/logo.png"
+      type="image/x-icon"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body
+    class="bg-[linear-gradient(to_bottom,rgba(255,252,252,0.884),rgba(255,252,252)),url('./assests/assets/bg.png')] bg-fixed bg-contain mooli-regular"
+  >
+    <header class="min-h-screen flex justify-end items-center flex-col gap-5">
+      <img
+        class="w-[320px] md:w-[420px] lg:w-[580px]"
+        src="./assests/assets/logo.png"
+        alt=""
+      />
+
+      <div
+        class="bg-[#febf00] w-20 h-20 flex justify-center items-center rounded-full shadow-xl mt-30 animate-bounce"
+      >
+        <i class="fa-solid fa-arrow-down text-xl"></i>
+      </div>
+      <div class="bg-[#febf00] py-8 md:text-xl w-full text-center font-bold">
+        Digital Menu Card For Our Lovely Customer
+      </div>
+    </header>
+    <main>
+      <div
+        class="w-11/12 mx-auto min-h-[500px] border-2 my-20 grid grid-cols-1 lg:grid-cols-12 gap-10"
+      >
+        <!-- category container -->
+        <div class="bg-red-500 min-h-[300px] lg:col-span-2"></div>
+
+        <!-- food container -->
+        <div class="bg-yellow-400 min-h-[300px] lg:col-span-7"></div>
+
+        <!-- Cart container -->
+        <div class="bg-cyan-300 min-h-[300px] lg:col-span-3"></div>
+      </div>
+    </main>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
