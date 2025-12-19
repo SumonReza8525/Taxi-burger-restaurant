@@ -2,7 +2,7 @@ const categoryContainer = document.getElementById("categoryContainer");
 
 const foodContainer = document.getElementById("foodContainer");
 
-const cart = [];
+let cart = [];
 // Load Category Function
 const loadCategories = async () => {
   try {
@@ -60,6 +60,7 @@ const loadSingleCategoryFoods = async (id) => {
       ` https://taxi-kitchen-api.vercel.app/api/v1/categories/${id}`
     );
     const data = await res.json();
+
     // console.log(data.foods);
     displaySingleCategoryFoods(data.foods);
   } catch (error) {
@@ -74,9 +75,9 @@ const displayCart = (cart) => {
   let sum = 0;
   cart.forEach((each) => {
     sum += parseFloat(each.price);
-    document.getElementById("total").innerText = sum;
+
     cartContainer.innerHTML += `
-<div class="flex items-center gap-4  p-3 shadow-2xl mt-6 bg-white rounded-sm">
+<div class="flex items-center gap-4 relative p-3 shadow-2xl mt-6 bg-white rounded-sm">
 <img
               class="w-[100px] rounded-md object-contain"
               src="${each.image}"
@@ -87,11 +88,13 @@ const displayCart = (cart) => {
 <p class="text-[#fedf00] font-bold">$ ${each.price} BDT</p>
 
 </div>
+<div onclick="deleteCart(${each.id})" class="text-red-700 text-xl absolute top-0 right-1 cursor-pointer">close</div>
 
 </div>
 
 `;
   });
+  document.getElementById("total").innerText = sum;
 };
 
 const addToCart = (id) => {
@@ -124,6 +127,17 @@ const addToCart = (id) => {
   }
   displayCart(cart);
   // console.log(cart);
+};
+
+const deleteCart = (id) => {
+  // console.log(id);
+
+  let newArr = cart.filter((item) => {
+    return item.id != id;
+  });
+
+  cart = [...newArr];
+  displayCart(cart);
 };
 
 const displaySingleCategoryFoods = (foods) => {
@@ -161,4 +175,18 @@ const displaySingleCategoryFoods = (foods) => {
   });
 };
 
+const randomFoods = async () => {
+  try {
+    const res = await fetch(
+      " https://taxi-kitchen-api.vercel.app/api/v1/foods/random"
+    );
+    const data = await res.json();
+    // console.log(data.foods);
+    displaySingleCategoryFoods(data.foods);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 loadCategories();
+randomFoods();
