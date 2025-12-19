@@ -67,6 +67,65 @@ const loadSingleCategoryFoods = async (id) => {
   }
 };
 
+// displaying cart
+const displayCart = (cart) => {
+  const cartContainer = document.getElementById("cartContainer");
+  cartContainer.innerHTML = "";
+  let sum = 0;
+  cart.forEach((each) => {
+    sum += parseFloat(each.price);
+    document.getElementById("total").innerText = sum;
+    cartContainer.innerHTML += `
+<div class="flex items-center gap-4  p-3 shadow-2xl mt-6 bg-white rounded-sm">
+<img
+              class="w-[100px] rounded-md object-contain"
+              src="${each.image}"
+              alt=""
+            />
+<div>
+<p class="text-xl text-gray-600 font-semibold">${each.name}</p>
+<p class="text-[#fedf00] font-bold">$ ${each.price} BDT</p>
+
+</div>
+
+</div>
+
+`;
+  });
+};
+
+const addToCart = (id) => {
+  // console.log("cart btn clicked", id);
+
+  const parent = document.getElementById(id);
+  // console.log(parent);
+  const foodName = parent.querySelector("p");
+  const foodNameText = foodName.innerText;
+  // console.log(foodNameText);
+  const image = parent.querySelector("img");
+
+  const imageUrl = image.src;
+
+  const price = parent.querySelector("#price");
+  const priceText = price.innerText;
+  // console.log(priceText);
+
+  const exist = cart.some((item) => {
+    return item.id == id;
+  });
+  if (exist) return;
+  else {
+    cart.push({
+      id: id,
+      name: foodNameText,
+      price: priceText,
+      image: imageUrl,
+    });
+  }
+  displayCart(cart);
+  // console.log(cart);
+};
+
 const displaySingleCategoryFoods = (foods) => {
   // console.log(foods);
   foodContainer.innerHTML = "";
@@ -91,7 +150,7 @@ const displaySingleCategoryFoods = (foods) => {
                 </p>
               </div>
 
-              <button class="bg-[#febf00] px-3 py-2 rounded-sm font-semibold">
+              <button onclick='addToCart(${food.id})' class="bg-[#febf00] px-3 py-2 rounded-sm font-semibold">
                <i class="fa-solid fa-basket-shopping"></i> Add This Item
               </button>
             </div>
