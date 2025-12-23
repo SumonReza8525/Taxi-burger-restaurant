@@ -57,6 +57,9 @@ categoryContainer.addEventListener("click", (e) => {
 // loading single category foods
 
 const loadSingleCategoryFoods = async (id) => {
+  document.getElementById("loading").classList.remove("hidden");
+
+  document.getElementById("foodContainer").classList.add("hidden");
   try {
     const res = await fetch(
       ` https://taxi-kitchen-api.vercel.app/api/v1/categories/${id}`
@@ -175,8 +178,10 @@ const showDetails = (id) => {
       console.log(error);
     }
   };
-  myModal.showModal();
+  const myModal = document.getElementById("myModal");
+
   fetchDetails();
+  myModal.showModal();
 };
 
 const displaySingleCategoryFoods = (foods) => {
@@ -212,14 +217,21 @@ const displaySingleCategoryFoods = (foods) => {
     
     `;
   });
+  document.getElementById("loading").classList.add("hidden");
+
+  document.getElementById("foodContainer").classList.remove("hidden");
 };
 
 const randomFoods = async () => {
+  document.getElementById("loading").classList.remove("hidden");
+
+  document.getElementById("foodContainer").classList.add("hidden");
   try {
     const res = await fetch(
       " https://taxi-kitchen-api.vercel.app/api/v1/foods/random"
     );
     const data = await res.json();
+
     // console.log(data.foods);
     displaySingleCategoryFoods(data.foods);
   } catch (error) {
@@ -249,7 +261,7 @@ const displayReview = (reviews) => {
     // console.log(review);
     reviewContainer.innerHTML += `
 
-<div class="shadow-xl bg-[#febf00] p-3 w-full min-w-full h-full flex justify-between gap-6 items-center flex-col lg:flex-row rounded-sm">
+<div class="shadow-xl bg-[#febf00] p-3 w-full min-w-full h-full flex justify-between gap-6 items-center flex-col lg:flex-row rounded-md">
 
 
 <div class="flex flex-col flex-1 justify-center items-center">
@@ -276,3 +288,41 @@ const displayReview = (reviews) => {
 };
 
 reviewLoad();
+
+document.getElementById("inputBtn").addEventListener("click", () => {
+  const input = document.getElementById("searchInput");
+  const inputValue = input.value.toLowerCase().trim();
+
+  const randomFoods = async () => {
+    document.getElementById("loading").classList.remove("hidden");
+
+    document.getElementById("foodContainer").classList.add("hidden");
+    try {
+      const res = await fetch(
+        " https://taxi-kitchen-api.vercel.app/api/v1/foods/random"
+      );
+      const data = await res.json();
+
+      const foods = data.foods;
+
+      // console.log(foods);
+
+      const filteredFoods = foods.filter((food) => {
+        return food.title.toLowerCase().includes(inputValue);
+      });
+
+      displaySingleCategoryFoods(filteredFoods);
+      const categories = document.querySelectorAll(".categoryDiv");
+      input.value = "";
+
+      for (let i of categories) {
+        i.classList.remove("bg-red-400");
+        i.classList.add("bg-white");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  randomFoods();
+});
